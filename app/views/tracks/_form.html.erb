@@ -1,0 +1,27 @@
+<%= form_with model: [ @album, @track ], data: { turbo_frame: "tracks" }, class: "w-full flex items-center justify-between" do |f| %>
+  <div class="my-4">
+    <%= f.text_field :title, placeholder: "Track Title", class: "block py-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none" %>
+    <% if @track.errors[:title].any? %>
+      <p class="text-red-500 text-sm mt-1"><%= @track.errors[:artist_name].first %></p>
+    <% end %>
+  </div>
+  
+  <div class="my-4">
+    <%= f.text_field :artist_name, placeholder: "Artist Name", class: "block border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none" %>
+    <% if @track.errors[:artist_name].any? %>
+      <p class="text-red-500 text-sm mt-1"><%= @track.errors[:artist_name].first %></p>
+    <% end %>
+  </div>
+
+  <div class="my-4">
+    <%= f.number_field :duration, min: 0, step: 1, placeholder: "Duration in minutes", class: "block border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none" %>
+  </div>
+  
+  <div class="flex items-center space-x-4 my-4">
+    <button type="submit" class="inline-block space-x-1 px-4 py-2 bg-green-700 text-white rounded-md hover:bg-green-600">
+      &#x2713;
+    </button>
+
+    <%= button_to "delete" [ @album, @track ], method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "block space-x-1 px-4 py-2 bg-rose-950 text-white rounded-md hover:bg-rose-700" %>
+  </div>
+<% end %>

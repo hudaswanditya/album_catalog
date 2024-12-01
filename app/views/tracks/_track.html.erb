@@ -1,0 +1,15 @@
+<li id="<%= dom_id track %>">
+  <%= turbo_frame_tag "edit_track" do %>
+    <div class="my-4 flex justify-between items-center">
+      <div>
+        <p class="inline-block" style="min-width: 80px;"><%= track.title %></p>
+        <p><%= track.artist_name %></p>
+      </div>
+      <div><%= seconds_to_minutes(track.duration) %></div>
+      <% if action_name == "edit" || action_name == "create" %>
+        <%= link_to "Edit", edit_album_track_path(track.album, track), class: "rounded-lg py-3 px-5 bg-blue-950 text-white block font-medium" %>
+      <% end %>
+    </div>
+  <% end %>
+  <hr>
+</li>
