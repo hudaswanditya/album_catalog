@@ -1,0 +1,36 @@
+<div id="<%= dom_id album %>" class="p-4 border rounded mb-5">
+  <div class="flex justify-between items-center mb-5">
+    <div class="flex items-center space-x-4">
+      <%= album_cover_image(album) %>
+      <div class="px-5"> 
+        <p class="text-2xl">
+          <%= album.name %>
+        </p>
+        <p>
+          <%= seconds_to_minutes(album.durations) %>
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <% if album.draft? %>
+        <%= button_to "Publish", publish_album_path(album), method: :patch, data: { turbo_confirm: "Are you sure?" }, class: "rounded-lg py-3 px-5 bg-green-700 text-white block font-medium" %>
+        <%= link_to "Edit", edit_album_path(album), class: "rounded-lg py-3 px-5 bg-blue-950 text-white block font-medium" %>
+        <%= button_to "Delete", album, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "rounded-lg py-3 px-5 bg-rose-950 text-white block font-medium" %>
+      <% else %>
+        <p>Published</p>
+      <% end %>
+    </div>
+  </div>
+  <hr>
+  <div class="flex justify-between items-center">
+    <ul class="w-full p-4 pt-0">
+      <% if album.tracks.any? %>
+        <%= render album.tracks %>
+      <% else %>
+        <li class="my-2">No tracks found</li>
+        <hr>
+      <% end %>
+    </ul>
+  </div>
+</div>

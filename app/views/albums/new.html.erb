@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "new_album" do %>
+  <%= form_with model: @album, data: { turbo_frame: "albums" }, class: "flex items-center space-x-4 w-full" do |form| %>
+
+    <%= render "form", album: @album, form: form %>
+
+    <button type="submit" class="flex items-center space-x-1 px-4 py-2 bg-green-700 text-white rounded-md hover:bg-green-600">
+      &#x2713;
+    </button>
+
+    <%= link_to albums_path, "data-turbo-method": "get", class: "flex items-center space-x-1 px-4 py-2 bg-rose-950 text-white rounded-md hover:bg-rose-700" do %>
+      &#x2715;
+    <% end %>
+
+  <% end %>
+<% end %>
