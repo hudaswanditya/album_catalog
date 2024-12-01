@@ -21,7 +21,8 @@
     <button type="submit" class="inline-block space-x-1 px-4 py-2 bg-green-700 text-white rounded-md hover:bg-green-600">
       &#x2713;
     </button>
-
-    <%= button_to "delete" [ @album, @track ], method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "block space-x-1 px-4 py-2 bg-rose-950 text-white rounded-md hover:bg-rose-700" %>
   </div>
+<% end %>
+<% if action_name == "edit" %>
+  <%= button_to "delete", [ @album, @track ], method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "block space-x-1 px-4 py-2 bg-rose-950 text-white rounded-md hover:bg-rose-700 mb-4" %>
 <% end %>

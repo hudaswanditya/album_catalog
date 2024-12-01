@@ -32,8 +32,13 @@ class TracksController < ApplicationController
   end
 
   def destroy
-    @track.destroy
-    redirect_to album_path(@album), notice: "Track was successfully deleted."
+    respond_to do |format|
+      if @track.destroy
+        format.html { redirect_to edit_album_path(@track.album), notice: "Track was successfully destroyed." }
+      else
+        format.html { redirect_to edit_album_path(@track.album), notice: @track.album.errors.full_messages.to_sentence }
+      end
+    end
   end
 
   private
