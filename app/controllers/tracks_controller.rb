@@ -24,10 +24,12 @@ class TracksController < ApplicationController
   def edit; end
 
   def update
-    if @track.update(track_params)
-      redirect_to edit_album_path(@album), notice: "Track was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @track.update(track_params)
+        format.html { redirect_to edit_album_path(@track.album), notice: "Track was successfully updated." }
+      else
+        format.html { redirect_to edit_album_path(@track.album), notice: @track.album.errors.full_messages.to_sentence }
+      end
     end
   end
 
